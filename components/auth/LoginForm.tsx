@@ -44,12 +44,13 @@ export const LoginForm = () => {
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
     setError("");
     setSuccess("");
+    console.log(values);
 
     startTransition(() => {
       login(values).then((data) => {
+        console.log("data", data);
         setError(data?.error);
-        // TODO add when we  add 2 FA
-        //  setSuccess(data?.success);
+        setSuccess(data?.success);
       });
     });
   };
