@@ -6,6 +6,7 @@ import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
+import { login } from "@/actions/login";
 import { CardWrapper } from "@/components/auth/CardWrapper";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
@@ -19,7 +20,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { login } from "@/src/actions/login";
 import { LoginSchema } from "@/src/schemas";
 
 export const LoginForm = () => {
@@ -44,11 +44,9 @@ export const LoginForm = () => {
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
     setError("");
     setSuccess("");
-    console.log(values);
 
     startTransition(() => {
       login(values).then((data) => {
-        console.log("data", data);
         setError(data?.error);
         setSuccess(data?.success);
       });

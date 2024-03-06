@@ -5,10 +5,11 @@
 import bcrypt from "bcryptjs";
 import { z } from "zod";
 
-import { getUserByEmail } from "@/src/data/user";
-import { db } from "@/src/lib/db";
+import { getUserByEmail } from "@/data/user";
+import { db } from "@/lib/db";
+import { generateVerificationToken } from "@/lib/tokens";
 import { RegisterSchema } from "@/src/schemas";
-import { generateVerificationToken } from "@/src/lib/tokens";
+import { sendVerificationEmail } from "@/lib/mail";
 
 export const register = async (values: z.infer<typeof RegisterSchema>) => {
   const validatedFields = RegisterSchema.safeParse(values);
@@ -33,7 +34,7 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
   });
 
   const verificationToken = await generateVerificationToken(email);
-  // TODO send verification token email
+  await sendVerificationEmail(verificationToken.email, verificationToken.token);
 
   return { success: "Email de confirmation envoyé" };
 };

@@ -2,12 +2,13 @@
 
 "use server";
 
-import { z } from "zod";
+import * as z from "zod";
 
 import { signIn } from "@/auth";
+import { getUserByEmail } from "@/data/user";
+import { generateVerificationToken } from "@/lib/tokens";
+import { sendVerificationEmail } from "@/lib/mail";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
-import { getUserByEmail } from "@/src/data/user";
-import { generateVerificationToken } from "@/src/lib/tokens";
 import { LoginSchema } from "@/src/schemas";
 import { AuthError } from "next-auth";
 
@@ -29,6 +30,10 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
     console.log("coucou");
     const verificationToken = await generateVerificationToken(
       existingUser.email
+    );
+    await sendVerificationEmail(
+      verificationToken.email,
+      verificationToken.token
     );
     return { success: "Email de confirmation renvoyé" };
   }
