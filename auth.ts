@@ -4,10 +4,10 @@ import NextAuth from "next-auth";
 import authConfig from "@/auth.config";
 import { db } from "@/lib/db";
 import { UserRole } from "@prisma/client";
-import { getUserById } from "./data/user";
+import { getUserById } from "@/data/user";
 
 export const {
-  handlers: { GET, POST },
+  handlers,
   auth,
   signIn,
   signOut,
@@ -27,6 +27,7 @@ export const {
   },
   callbacks: {
     async signIn({ user, account }) {
+      console.log({user, account})
       // Allow OAuth without email verification
       if (account?.provider !== "credentials") return true;
 
