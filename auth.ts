@@ -1,10 +1,10 @@
-import {PrismaAdapter} from "@auth/prisma-adapter";
+import { PrismaAdapter } from "@auth/prisma-adapter";
 import NextAuth from "next-auth";
 
 import authConfig from "@/auth.config";
-import {db} from "@/src/lib/db";
-import {UserRole} from "@prisma/client";
-import {getUserById} from "@/src/data/user";
+import { getUserById } from "@/src/data/user";
+import { db } from "@/src/lib/db";
+import { UserRole } from "@prisma/client";
 
 export const {
   handlers,

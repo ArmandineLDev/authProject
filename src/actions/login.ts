@@ -21,11 +21,13 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
 
   const {email, password} = validatedFields.data;
 
+
   const existingUser = await getUserByEmail(email);
 
   if (!existingUser || !existingUser.email || !existingUser.password)
     return {error: "Erreur dans les identifiants"};
 
+  // si l'email n'est pas vérifié, on renvoie un email de vérification
   if (!existingUser.emailVerified) {
     const verificationToken = await generateVerificationToken(
       existingUser.email
