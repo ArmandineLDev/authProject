@@ -1,13 +1,13 @@
-import { PrismaAdapter } from "@auth/prisma-adapter";
+import {PrismaAdapter} from "@auth/prisma-adapter";
 import NextAuth from "next-auth";
 
 import authConfig from "@/auth.config";
-import { db } from "@/lib/db";
-import { UserRole } from "@prisma/client";
-import { getUserById } from "./data/user";
+import {db} from "@/src/lib/db";
+import {UserRole} from "@prisma/client";
+import {getUserById} from "@/src/data/user";
 
 export const {
-  handlers: { GET, POST },
+  handlers,
   auth,
   signIn,
   signOut,
@@ -17,16 +17,15 @@ export const {
     error: "/auth/error",
   },
   events: {
-    async linkAccount({ user }) {
-      console.log("user", user);
+    async linkAccount({user}) {
       await db.user.update({
-        where: { id: user.id },
-        data: { emailVerified: new Date() },
+        where: {id: user.id},
+        data: {emailVerified: new Date()},
       });
     },
   },
   callbacks: {
-    async signIn({ user, account }) {
+    async signIn({user, account}) {
       // Allow OAuth without email verification
       if (account?.provider !== "credentials") return true;
 
@@ -40,7 +39,7 @@ export const {
 
       return true;
     },
-    async session({ token, session }) {
+    async session({token, session}) {
       if (token.sub && session.user) {
         session.user.id = token.sub;
       }
@@ -52,7 +51,7 @@ export const {
       return session;
     },
 
-    async jwt({ token }) {
+    async jwt({token}) {
       if (!token.sub) return token;
 
       const existingUser = await getUserById(token.sub);
@@ -63,6 +62,6 @@ export const {
     },
   },
   adapter: PrismaAdapter(db),
-  session: { strategy: "jwt" },
+  session: {strategy: "jwt"},
   ...authConfig,
 });

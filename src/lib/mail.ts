@@ -1,4 +1,4 @@
-import { Resend } from "resend";
+import {Resend} from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -11,7 +11,7 @@ export const sendVerificationEmail = async (email: string, token: string) => {
   await resend.emails.send({
     from: process.env.RESEND_FROM,
     to: email,
-    subject: "Confirm your mail",
+    subject: "Auth - Confirm your mail",
     html: ` <p>Click <a href="${confirmLink}">here</a> to confirm email.</p>`,
   });
 };

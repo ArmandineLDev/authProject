@@ -5,11 +5,11 @@ import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-import { register } from "@/actions/register";
-import { CardWrapper } from "@/components/auth/CardWrapper";
-import { FormError } from "@/components/form-error";
-import { FormSuccess } from "@/components/form-success";
-import { Button } from "@/components/ui/button";
+import { register } from "@/src/actions/register";
+import { CardWrapper } from "@/src/components/auth/CardWrapper";
+import { FormError } from "@/src/components/form-error";
+import { FormSuccess } from "@/src/components/form-success";
+import { Button } from "@/src/components/ui/button";
 import {
   Form,
   FormControl,
@@ -17,8 +17,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from "@/src/components/ui/form";
+import { Input } from "@/src/components/ui/input";
 import { RegisterSchema } from "@/src/schemas";
 
 export const RegisterForm = () => {
