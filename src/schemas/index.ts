@@ -8,6 +8,13 @@ export const LoginSchema = z.object({
     .string()
     .min(1, { message: "Veuillez entrer votre mot de passe" }),
 });
+
+export const ResetSchema = z.object({
+  email: z
+    .string()
+    .email({ message: "Veuillez entrer une adresse email valide" }),
+});
+
 export const RegisterSchema = z.object({
   email: z
     .string()

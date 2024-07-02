@@ -1,14 +1,14 @@
 "use client";
 
-import { AuthCardHeader } from "@/components/auth/AuthCardHeader";
-import { BackButton } from "@/components/auth/BackButton";
-import { Social } from "@/components/auth/Social";
+import { AuthCardHeader } from "@/src/components/auth/AuthCardHeader";
+import { BackButton } from "@/src/components/auth/BackButton";
+import { Social } from "@/src/components/auth/Social";
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
-} from "@/components/ui/card";
+} from "@/src/components/ui/card";
 
 interface CardWrapperProps {
   children: React.ReactNode;
