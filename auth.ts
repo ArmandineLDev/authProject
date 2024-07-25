@@ -4,7 +4,7 @@ import NextAuth from "next-auth";
 import authConfig from "@/auth.config";
 import { getTwoFactorConfirmationByUserId } from "@/src/data/two-factor-confirmation";
 import { getUserById } from "@/src/data/user";
-import { db } from "@/src/lib/db";
+import { db } from "@/lib/db";
 import { UserRole } from "@prisma/client";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({

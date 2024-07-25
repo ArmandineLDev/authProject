@@ -4,7 +4,7 @@ import { getUserByEmail } from "@/src/data/user";
 import { NewPasswordSchema } from "@/src/schemas";
 import bcrypt from "bcryptjs";
 import * as z from "zod";
-import { db } from "../lib/db";
+import { db } from "@/lib/db";
 
 export const newPassword = async (
   values: z.infer<typeof NewPasswordSchema>,

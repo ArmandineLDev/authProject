@@ -9,16 +9,16 @@ import { getUserByEmail } from "@/src/data/user";
 import {
   generateVerificationToken,
   generateTwoFactorToken,
-} from "@/src/lib/tokens";
+} from "@/lib/tokens";
 
-import { sendVerificationEmail, sendTwoFactorTokenEmail } from "@/src/lib/mail";
+import { sendVerificationEmail, sendTwoFactorTokenEmail } from "@/lib/mail";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { LoginSchema } from "@/src/schemas";
 import { AuthError } from "next-auth";
 import {getTwoFactorTokenByEmail} from "@/src/data/twoFactorToken";
 import {getTwoFactorConfirmationByUserId} from "@/src/data/two-factor-confirmation";
 
-import {db} from "@/src/lib/db";
+import {db} from "@/lib/db";
 
 export const login = async (values: z.infer<typeof LoginSchema>) => {
   const validatedFields = LoginSchema.safeParse(values);

@@ -2,7 +2,7 @@
 
 import { getUserByEmail } from "@/src/data/user";
 import { getVerificationTokenByToken } from "@/src/data/verificationToken";
-import { db } from "@/src/lib/db";
+import { db } from "@/lib/db";
 
 export const newVerification = async (token: string) => {
   const existingToken = await getVerificationTokenByToken(token);
