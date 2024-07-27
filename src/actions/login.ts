@@ -58,7 +58,7 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
       await db.twoFactorToken.delete({where: {id: twoFactorToken.id}});
 
       const existingConfirmation = await getTwoFactorConfirmationByUserId(existingUser.id)
-      await console.log(1, {existingConfirmation})
+    
       if (existingConfirmation) {
         await db.twoFactorConfirmation.delete( {where: {id: existingConfirmation.id}})
       }
@@ -66,7 +66,7 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
         data: {userId: existingUser.id}
       })
       const test = await getTwoFactorConfirmationByUserId(existingUser.id)
-      await console.log(2, {test})
+     
 
     } else {
     const twoFactorToken = await generateTwoFactorToken(existingUser.email);
