@@ -84,11 +84,7 @@ export const LoginForm = () => {
                   <FormItem>
                     <FormLabel>Two Factor Code</FormLabel>
                     <FormControl>
-                      <Input
-                        disabled={isPending}
-                        {...field}
-                        placeholder="123456"
-                      />
+                      <Input disabled={isPending} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
