@@ -10,15 +10,32 @@ export const SettingsSchema = z
     password: z.optional(z.string().min(6)),
     newPassword: z.optional(z.string().min(6)),
   })
-  .refine((data) => {
-    if (
-      (data.password && !data.newPassword) ||
-      (!data.password && data.newPassword)
-    ) {
-      return false;
+  .refine(
+    (data) => {
+      if (data.password && !data.newPassword) {
+        return false;
+      }
+
+      return true;
+    },
+    {
+      message: "New password is required!",
+      path: ["newPassword"],
     }
-    return true;
-  });
+  )
+  .refine(
+    (data) => {
+      if (data.newPassword && !data.password) {
+        return false;
+      }
+
+      return true;
+    },
+    {
+      message: "Password is required!",
+      path: ["password"],
+    }
+  );
 export const LoginSchema = z.object({
   email: z
     .string()

@@ -1,6 +1,6 @@
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import NextAuth from "next-auth";
-
+import { useSession } from "next-auth/react";
 import authConfig from "@/auth.config";
 import { db } from "@/lib/db";
 import { getTwoFactorConfirmationByUserId } from "@/src/data/two-factor-confirmation";
@@ -8,7 +8,7 @@ import { getUserById } from "@/src/data/user";
 import { UserRole } from "@prisma/client";
 import { getAccountByUserId } from "./src/data/account";
 
-export const { handlers, auth, signIn, signOut } = NextAuth({
+export const { handlers, auth, signIn, signOut, unstable_update } = NextAuth({
   pages: {
     signIn: "/auth/login",
     error: "/auth/error",
