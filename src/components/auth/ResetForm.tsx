@@ -5,6 +5,7 @@ import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
+import { reset } from "@/src/actions/reset";
 import { CardWrapper } from "@/src/components/auth/CardWrapper";
 import { FormError } from "@/src/components/form-error";
 import { FormSuccess } from "@/src/components/form-success";
@@ -18,7 +19,6 @@ import {
   FormMessage,
 } from "@/src/components/ui/form";
 import { Input } from "@/src/components/ui/input";
-import { login } from "@/src/actions/login";
 import { ResetSchema } from "@/src/schemas";
 
 export const ResetForm = () => {
@@ -36,18 +36,18 @@ export const ResetForm = () => {
   const onSubmit = (values: z.infer<typeof ResetSchema>) => {
     setError("");
     setSuccess("");
-    console.log(values.email);
-    // startTransition(() => {
-    //   login(values).then((data) => {
-    //     setError(data?.error);
-    //     setSuccess(data?.success);
-    //   });
-    // });
+
+    startTransition(() => {
+      reset(values).then((data) => {
+        setError(data?.error);
+        setSuccess(data?.success);
+      });
+    });
   };
 
   return (
     <CardWrapper
-      headerLabel="Vous avez oublié votre mot de passe ?"
+      headerLabel="Mot de passer oublié ?"
       backButtonLabel="Retour à la page de connexion"
       backButtonHref="/auth/login"
     >
@@ -76,7 +76,7 @@ export const ResetForm = () => {
           <FormError message={error} />
           <FormSuccess message={success} />
           <Button type="submit" disabled={isPending} className="w-full">
-            Réinitialiser le mot de passe
+            Reset Password
           </Button>
         </form>
       </Form>

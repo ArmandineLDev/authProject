@@ -1,4 +1,5 @@
 {
+
   "name": "auth-project",
   "version": "0.1.0",
   "engines": {
@@ -64,4 +65,6 @@
   "overrides": {
     "eslint": "$eslint"
   }
+
+
 }
